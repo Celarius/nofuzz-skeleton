@@ -1,0 +1,56 @@
+{
+  "common": {
+    "before": [
+      "\\App\\Middleware\\RequestIdBeforeMiddleware",
+      "\\App\\Middleware\\CorsBeforeMiddleware"
+    ],
+    "after": [
+      "\\App\\Middleware\\RequestIdAfterMiddleware",
+      "\\App\\Middleware\\ResponseTimeAfterMiddleware",
+      "\\App\\Middleware\\ResponseLogAfterMiddleware"
+    ]
+  },
+  "groups": [
+    {
+      "name": "unversioned",
+      "notes": "",
+      "prefix": "/api",
+      "before": [],
+      "routes": [
+        { "methods":[],       "path":"/health",           "handler":"\\App\\Controllers\\HealthController" },
+        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\StatusController" }
+      ],
+      "after": []
+    },
+    {
+      "name":"Public",
+      "notes": "Public endpoints",
+      "prefix": "/api/v1",
+      "before": [],
+      "routes": [
+      ],
+      "after": []
+    },
+    {
+      "name":"Private",
+      "notes": "Private endpoints",
+      "prefix": "/api/v1",
+      "before": [
+        "\\App\\Middleware\\AuthHttpBeforeMiddleware"
+      ],
+      "routes": [
+      ],
+      "after": []
+    },
+    {
+      "name":"Default",
+      "notes": "Default route if nothing matches",
+      "prefix": "",
+      "before": [],
+      "routes": [
+        { "methods":[],        "path":"/",                "handler":"\\App\\Controllers\\v1\\DefaultController" }
+      ],
+      "after": []
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="src/tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Nofuzz-Skeleton Test Suite">
+            <directory>src/tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <ini name="date.timezone" value="UTC"/>
+    </php>
+</phpunit>
